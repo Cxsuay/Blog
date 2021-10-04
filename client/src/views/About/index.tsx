@@ -78,7 +78,7 @@ export const About: FC = () => {
           <ul>
             <li>
               <p>
-                2021.10.05，搭建个人博客。
+                2021.10.03，搭建个人博客。
               </p>
               <p>
                 <TextTag>React + Ts</TextTag>构建PC端、<TextTag>Vue + VitePress</TextTag>构建移动端、<TextTag>Mongodb + Koa</TextTag>构建Server端。
