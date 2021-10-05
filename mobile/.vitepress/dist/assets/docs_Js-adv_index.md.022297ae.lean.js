@@ -1,1 +1,0 @@
-import{_ as a,c as e,o as d,a as r}from"./app.9a3fef87.js";const t='{"title":"Js-adv","description":"","frontmatter":{},"headers":[{"level":3,"title":"类型 🍓","slug":"类型-🍓"}],"relativePath":"docs/Js-adv/index.md","lastUpdated":1632732114000}',s={},i=[r('',2)];var h=a(s,[["render",function(a,r,t,s,h,n){return d(),e("div",null,i)}]]);export{t as __pageData,h as default};

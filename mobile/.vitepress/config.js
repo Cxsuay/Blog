@@ -20,20 +20,8 @@ module.exports = {
     "text": "引导",
     "items": [
       {
-        "text": "Js",
-        "link": "/docs/Js/"
-      },
-      {
-        "text": "Js-adv",
-        "link": "/docs/Js-adv/"
-      },
-      {
-        "text": "Node",
-        "link": "/docs/Node/"
-      },
-      {
-        "text": "Vue",
-        "link": "/docs/Vue/"
+        "text": "LeetCode",
+        "link": "/docs/LeetCode/"
       }
     ]
   },
@@ -50,111 +38,17 @@ module.exports = {
 ],
     sidebar: [
   {
-    "title": "首页",
-    "path": "/",
+    "text": "首页",
+    "link": "/",
     "collapsable": false
   },
   {
-    "text": "Js",
-    "link": "/docs/Js",
+    "text": "LeetCode",
+    "link": "/docs/LeetCode/index",
     "children": [
       {
-        "text": "Array",
-        "link": "/docs/Js/Array"
-      },
-      {
-        "text": "Class",
-        "link": "/docs/Js/Class"
-      },
-      {
-        "text": "Closure",
-        "link": "/docs/Js/Closure"
-      },
-      {
-        "text": "Code",
-        "link": "/docs/Js/Code"
-      },
-      {
-        "text": "Codes-promise",
-        "link": "/docs/Js/Codes-promise"
-      },
-      {
-        "text": "Copy",
-        "link": "/docs/Js/Copy"
-      },
-      {
-        "text": "EventLoop",
-        "link": "/docs/Js/EventLoop"
-      },
-      {
-        "text": "Function",
-        "link": "/docs/Js/Function"
-      },
-      {
-        "text": "Methods",
-        "link": "/docs/Js/Methods"
-      },
-      {
-        "text": "Modular",
-        "link": "/docs/Js/Modular"
-      },
-      {
-        "text": "Object",
-        "link": "/docs/Js/Object"
-      },
-      {
-        "text": "Promise",
-        "link": "/docs/Js/Promise"
-      },
-      {
-        "text": "RegExp",
-        "link": "/docs/Js/RegExp"
-      },
-      {
-        "text": "Sub",
-        "link": "/docs/Js/Sub"
-      },
-      {
-        "text": "Symbol",
-        "link": "/docs/Js/Symbol"
-      }
-    ]
-  },
-  {
-    "text": "Js-adv",
-    "link": "/docs/Js-adv",
-    "children": [
-      {
-        "text": "Type",
-        "link": "/docs/Js-adv/Type"
-      }
-    ]
-  },
-  {
-    "text": "Node",
-    "link": "/docs/Node",
-    "children": [
-      {
-        "text": "Api",
-        "link": "/docs/Node/Api"
-      },
-      {
-        "text": "Guide",
-        "link": "/docs/Node/Guide"
-      }
-    ]
-  },
-  {
-    "text": "Vue",
-    "link": "/docs/Vue",
-    "children": [
-      {
-        "text": "Base",
-        "link": "/docs/Vue/Base"
-      },
-      {
-        "text": "Component",
-        "link": "/docs/Vue/Component"
+        "text": "NumberSum",
+        "link": "/docs/LeetCode/NumberSum"
       }
     ]
   }

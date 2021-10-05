@@ -4,7 +4,7 @@ heroImage: /tag_bg.jpg
 heroText: Cxsuay
 tagline: Keep on going never give up
 actionText: 欢 ✨ 迎 👆
-actionLink: /docs/Js/
+actionLink: /docs/LeetCode/
 # layout: Main
 sidebar: auto
 features:

@@ -79,25 +79,25 @@ const buildNavbar = (dirs) => {
  */
 const buildSidebar = (dirs, mdDirPath) => {
   const _sidebarList = [{
-    title: '首页',
-    path: '/',
+    text: '首页',
+    link: '/',
     collapsable: false,
   }];
-  const genSideBarItem = (_fileDirs, curPath) => {
+  const genSideBarItem = (_fileDirs, curPath, flag) => {
     return _fileDirs
       .map(_dir => {
         if (~['index.md', '.DS_Store'].indexOf(_dir)) return false;
         const itemLinkPath = `${curPath}/${_dir}`;
         const _currentPathModel = {
           text: removeSuffix(genFileRuleName(_dir)),
-          link: removeSuffix(itemLinkPath)
+          link: removeSuffix(itemLinkPath + `${!flag ? '/index' : ''}`)
         };
         const childDirPath = `${mdDirPath}/${_dir}`;
         if (!/\.md$/g.test(childDirPath)) {
           const childDirs = fs.readdirSync(childDirPath);
           if (childDirs && Array.isArray(childDirs) && childDirs.length) {
             (_currentPathModel.children || (_currentPathModel.children = [])).push(
-              ...genSideBarItem(childDirs, itemLinkPath)
+              ...genSideBarItem(childDirs, itemLinkPath, true)
             );
           }
         }
@@ -106,7 +106,7 @@ const buildSidebar = (dirs, mdDirPath) => {
       .filter(_file => _file);
   };
   _sidebarList.push(
-    ...genSideBarItem(dirs, `/${curMdFileName}`)
+    ...genSideBarItem(dirs, `/${curMdFileName}`, false)
   );
   return _sidebarList;
 };
