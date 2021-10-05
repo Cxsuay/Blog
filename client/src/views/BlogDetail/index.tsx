@@ -105,6 +105,21 @@ const MdBox = styled.div`
     padding: 0;
     border-radius: 0;
   }
+  blockquote {
+    position: relative;
+    padding-left: 1.3rem;
+    color: #888;
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #eee;
+      content: ' ';
+      width: 0.5rem;
+      border-radius: 1rem;
+      height: 100%;
+    }
+  }
 `;
 const BlogDetailNav = styled(MarkNav)`
   width: 25rem;
