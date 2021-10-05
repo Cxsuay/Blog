@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { Divider, Tag } from "antd";
+import { Divider, Empty, Tag } from "antd";
 import { getBlogList } from "apis/blog";
 import { IBlogItem, ITagItem } from "utils/dataMap";
 import dayjs from "dayjs";
@@ -65,42 +65,46 @@ export const BlogList: FC = () => {
 
   return (
     <BlogBox>
-      {blogList.map((_blog, index) => (
-        <div key={_blog._id}>
-          <BlogItem
-            onMouseEnter={() => handleEnterItem(index)}
-            onMouseLeave={handleLeaveItem}
-            onClick={() => intoBlogDetail(_blog)}
-          >
-            <ItemTitle actived={itemActive === index}>
-              {_blog.isTop ? (
-                <ItemIsTop>
-                  [Top
-                  <FireOutlined style={{ fontSize: "1.6rem" }} />]
-                </ItemIsTop>
-              ) : null}
-              {_blog.title}
-            </ItemTitle>
-
-            <ItemDesc actived={itemActive === index}>{_blog.desc}</ItemDesc>
-
-            <ItemBottom>
-              <ItemTime actived={itemActive === index}>
-                Posted by {sApp.siteTag} on
-                {dayjs(_blog.updateDate).format("YYYY/MM/DD")}
-              </ItemTime>
-              <ItemTag>
-                {Object.keys(_blog.tagInfo as ITagItem).length ? (
-                  <Tag color={(_blog.tagInfo as ITagItem).color}>
-                    {(_blog.tagInfo as ITagItem).name}
-                  </Tag>
+      {
+        pagerParams.total ?
+        blogList.map((_blog, index) => (
+          <div key={_blog._id}>
+            <BlogItem
+              onMouseEnter={() => handleEnterItem(index)}
+              onMouseLeave={handleLeaveItem}
+              onClick={() => intoBlogDetail(_blog)}
+            >
+              <ItemTitle actived={itemActive === index}>
+                {_blog.isTop ? (
+                  <ItemIsTop>
+                    [Top
+                    <FireOutlined style={{ fontSize: "1.6rem" }} />]
+                  </ItemIsTop>
                 ) : null}
-              </ItemTag>
-            </ItemBottom>
-          </BlogItem>
-          {index === blogList.length - 1 ? null : <Divider />}
-        </div>
-      ))}
+                {_blog.title}
+              </ItemTitle>
+
+              <ItemDesc actived={itemActive === index}>{_blog.desc}</ItemDesc>
+
+              <ItemBottom>
+                <ItemTime actived={itemActive === index}>
+                  Posted by {sApp.siteTag} on
+                  {dayjs(_blog.updateDate).format("YYYY/MM/DD")}
+                </ItemTime>
+                <ItemTag>
+                  {Object.keys(_blog.tagInfo as ITagItem).length ? (
+                    <Tag color={(_blog.tagInfo as ITagItem).color}>
+                      {(_blog.tagInfo as ITagItem).name}
+                    </Tag>
+                  ) : null}
+                </ItemTag>
+              </ItemBottom>
+            </BlogItem>
+            {index === blogList.length - 1 ? null : <Divider />}
+          </div>
+        )) :
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无数据" />
+      }
 
       <Pager pagerParams={pagerParams} pageJump={pageJump} />
     </BlogBox>

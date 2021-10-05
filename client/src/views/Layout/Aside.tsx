@@ -45,7 +45,7 @@ export const Aside: FC = () => {
 
 const AsideBox = styled.div`
   width: 20rem;
-  min-height: 100vh;
+  min-height: 35rem;
 `;
 const AsideTitle = styled.h5`
   font-size: 1.6rem;

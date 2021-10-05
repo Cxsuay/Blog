@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { FlexBlock } from "style/common";
 import { IBlogItem, ITagItem } from "utils/dataMap";
 import { getTagList, getTagBlogList } from "apis/tag";
-import { Divider } from "antd";
+import { Divider, Empty } from "antd";
 import { ClockCircleOutlined, FireOutlined } from "@ant-design/icons";
 import { useStores } from "store";
 import { Pager } from "components/Pager";
@@ -50,9 +50,7 @@ export const Catalogue: FC = () => {
   };
 
   const handleClickTag: (id: string) => void = (id) => {
-    setCurrentTagID(id);
-    setPagerParams({ ...pagerParams, pageSize: 100, pageNo: 1, });
-    getData(id);
+    navigate(`/catalogue/${id}`);
   };
   const handleIntoDetail: (id: string) => void = (id) => {
     navigate(`/blog-detail/${id}`);
@@ -70,7 +68,7 @@ export const Catalogue: FC = () => {
     dispatchDir[direction]();
   };
   useEffect(() => {
-    setCurrentTagID(classifyID || "showAll")
+    setCurrentTagID(classifyID || "showAll");
     getData(classifyID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routes.pathname, pagerParams.pageNo]);
@@ -99,23 +97,27 @@ export const Catalogue: FC = () => {
 
       <BlogBox>
         <BlogTitle>Blogs</BlogTitle>
-        {blogList.map((_blog, index) => {
-          return (
-            <BlogItem
-              key={_blog._id}
-              onClick={() => handleIntoDetail(_blog._id)}
-            >
-              {_blog.isTop ? (
-                <ItemIsTop>
-                  [Top
-                  <FireOutlined style={{ fontSize: "1.4rem" }} />]
-                </ItemIsTop>
-              ) : null}
-              {_blog.title}
-              {index === blogList.length - 1 ? null : <Divider />}
-            </BlogItem>
-          );
-        })}
+        {
+          pagerParams.total ? 
+          blogList.map((_blog, index) => {
+            return (
+              <BlogItem
+                key={_blog._id}
+                onClick={() => handleIntoDetail(_blog._id)}
+              >
+                {_blog.isTop ? (
+                  <ItemIsTop>
+                    [Top
+                    <FireOutlined style={{ fontSize: "1.4rem" }} />]
+                  </ItemIsTop>
+                ) : null}
+                {_blog.title}
+                {index === blogList.length - 1 ? null : <Divider />}
+              </BlogItem>
+            );
+          }) :
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无数据" />
+        }
       </BlogBox>
 
       <Pager pagerParams={pagerParams} pageJump={pageJump} />
