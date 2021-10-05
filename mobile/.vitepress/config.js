@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Cxsuay',
-  base: '/',
+  base: '/blog/',
   description: 'Keep on going never give up',
   head: [
     // 添加图标
