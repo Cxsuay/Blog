@@ -17,6 +17,7 @@ export const Catalogue: FC = () => {
   
   const [blogList, setBlogList] = useState<IBlogItem[]>([]);
   const [tagList, setTagList] = useState<ITagItem[]>([]);
+  // FIXME: useState 中的 setXXX 是异步操作~ 需注意~
   const [currentTagID, setCurrentTagID] = useState("showAll");
   const { sApp } = useStores();
   useDocumentTitle(`博客目录🌊｜${sApp.siteTag}`);
@@ -26,32 +27,32 @@ export const Catalogue: FC = () => {
     total: 0,
   });
 
-  const getData: (isInit?: boolean, _blogReq?: { tagID: string }) => void =
-    async (isInit = false, _blogReq) => {
-      if (isInit) sApp.CHANGE_LOADING(true);
+  const getData: (tagID: string) => void = async (tagID) => {
+    const _blogReq: { [prop: string]: number | string } = {
+      tagID: (tagID === 'showAll') ? '' : tagID,
+      pageSize: pagerParams.pageSize,
+      pageNo: pagerParams.pageNo,
+    }
+    sApp.CHANGE_LOADING(true);
 
-      const { list: blogList = [], total = 0 } = (await getTagBlogList(
-        _blogReq
-      )) as any;
-      setPagerParams({ ...pagerParams, total });
-      const _tagReq = {
-        isShowAll: true,
-      };
-      const { list: tagList = [] } = (await getTagList(_tagReq)) as any;
-      setBlogList(blogList);
-      setTagList(tagList);
-
-      sApp.CHANGE_LOADING(false);
+    const { list: blogList = [], total = 0 } = (await getTagBlogList(
+      _blogReq
+    )) as any;
+    setPagerParams({ ...pagerParams, total });
+    const _tagReq = {
+      isShowAll: true,
     };
+    const { list: tagList = [] } = (await getTagList(_tagReq)) as any;
+    setBlogList(blogList);
+    setTagList(tagList);
 
-  useEffect(() => {
-    getData(true);
-    setCurrentTagID(classifyID || "showAll");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [routes.pathname]);
+    sApp.CHANGE_LOADING(false);
+  };
 
   const handleClickTag: (id: string) => void = (id) => {
     setCurrentTagID(id);
+    setPagerParams({ ...pagerParams, pageSize: 100, pageNo: 1, });
+    getData(id);
   };
   const handleIntoDetail: (id: string) => void = (id) => {
     navigate(`/blog-detail/${id}`);
@@ -68,20 +69,11 @@ export const Catalogue: FC = () => {
     };
     dispatchDir[direction]();
   };
-  const blogReq = {
-    tagID: currentTagID === "showAll" ? "" : currentTagID,
-    pageSize: pagerParams.pageSize,
-    pageNo: pagerParams.pageNo,
-  };
   useEffect(() => {
-    getData(false, blogReq);
+    setCurrentTagID(classifyID || "showAll")
+    getData(classifyID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagerParams.pageNo]);
-
-  useEffect(() => {
-    getData(false, blogReq);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTagID]);
+  }, [routes.pathname, pagerParams.pageNo]);
 
   return (
     <CatalogueBox>
