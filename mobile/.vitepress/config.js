@@ -49,6 +49,10 @@ module.exports = {
       {
         "text": "NumberSum",
         "link": "/docs/LeetCode/NumberSum"
+      },
+      {
+        "text": "RemoveElement",
+        "link": "/docs/LeetCode/removeElement"
       }
     ]
   }
