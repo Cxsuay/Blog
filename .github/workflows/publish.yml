@@ -24,6 +24,10 @@ jobs:
           # 版本需要 大于14~
           node-version: 14.0.0
 
+      # 进入 client(React) 目录
+      - name: 进入 client 项目
+        run: cd client
+
       # 安装依赖
       - name: 安装依赖
         run: npm install
@@ -43,7 +47,7 @@ jobs:
           # scp 参数
           ARGS: "-avzr --delete"
           # 源目录
-          SOURCE: "dist"
+          SOURCE: "build"
           # 服务器ip
           REMOTE_HOST: "49.233.119.95"
           # 用户
