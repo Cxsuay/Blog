@@ -64,3 +64,6 @@ jobs:
           TARGET: "/test_gl"
           # 排除 node_modules ~
           EXCLUDE: "/**/node_modules/"
+
+          - name: 新建一个文件测试
+          run: cd server && touch test123.js
