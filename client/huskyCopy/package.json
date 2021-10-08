@@ -38,6 +38,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "client": "yarn start",
+    "prepare": "husky install",
     "json-server": "json-server __json_server_mock__/db.json --watch --port 3333 --middlewares ./__json_server_mock__/middleware.js"
   },
   "eslintConfig": {
@@ -72,9 +73,16 @@
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.2",
     "json-server": "^0.16.3",
     "lint-staged": "^11.1.2",
     "prettier": "2.3.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "lint-staged": {
     "*.{js,jsx,css,md,ts,tsx}": "prettier --write"
