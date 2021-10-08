@@ -61,6 +61,6 @@ jobs:
           # 用户
           REMOTE_USER: "root"
           # 目标地址
-          TARGET: "/test_gl",
+          TARGET: "/test_gl"
           # 排除 node_modules ~
           EXCLUDE: "/**/node_modules/"
