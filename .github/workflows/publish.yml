@@ -24,17 +24,17 @@ jobs:
           # 版本需要 大于14~
           node-version: 14.0.0
 
-      # 进入 client(React) 目录
-      - name: 进入 client 项目
-        run: cd client
+      # 标注一下，经过测试，这种方式没用，进入 client(React) 目录...
+      # - name: 进入 client 项目
+      #   run: cd client
 
       # 安装依赖
       - name: 安装依赖
-        run: npm install
+        run: cd client && npm install
 
       # 打包
       - name: 打包
-        run: npm run build
+        run: cd client && npm run build
 
       # 上传阿里云
       - name: 发布到腾讯云
@@ -47,7 +47,7 @@ jobs:
           # scp 参数
           ARGS: "-avzr --delete"
           # 源目录
-          SOURCE: "build"
+          SOURCE: "client/build"
           # 服务器ip
           REMOTE_HOST: "49.233.119.95"
           # 用户
