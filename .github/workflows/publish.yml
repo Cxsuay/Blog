@@ -28,13 +28,21 @@ jobs:
       # - name: 进入 client 项目
       #   run: cd client
 
-      # 安装依赖
+      # 安装依赖 - PC
       - name: 安装依赖
         run: cd client && npm install
 
-      # 打包
+      # 打包 - PC
       - name: 打包
         run: cd client && npm run build
+
+      # 安装依赖 - Mobile
+      - name: 安装依赖
+        run: cd mobile && npm install
+
+      # 打包 - Mobile
+      - name: 打包
+        run: cd mobile && npm run build
 
       # 上传腾讯云
       - name: 发布到腾讯云
@@ -53,5 +61,6 @@ jobs:
           # 用户
           REMOTE_USER: "root"
           # 目标地址
-          TARGET: "/test_gl"
-      
+          TARGET: "/test_gl",
+          # 排除 node_modules ~
+          EXCLUDE: "/**/node_modules/"
